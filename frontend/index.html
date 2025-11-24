@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>FE Test</title></head>
+<body>
+    <h1>Front-end: Đã triển khai</h1>
+    <button onclick="fetchAPI()">Test BE</button>
+    <p id="result">Trạng thái BE sẽ hiển thị ở đây...</p>
+
+    <script>
+        function fetchAPI() {
+            const API_ENDPOINT = '/api/api.php'; 
+            fetch(API_ENDPOINT)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('result').innerHTML = " BE thành công: " + data.message;
+                })
+                .catch(err => {
+                    document.getElementById('result').innerHTML = " Lỗi kết nối BE: " + err;
+                });
+        }
+    </script>
+</body>
+</html>
