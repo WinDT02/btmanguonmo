@@ -1,0 +1,20 @@
+# Tên tệp: .github/workflows/frontend.yml
+name: Deploy Frontend (HTML/JS)
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'frontend/**' ]
+
+jobs:
+  deploy_fe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy FE via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.0
+        with:
+          server: ${{ secrets.FTP_HOST_FE }}
+          username: ${{ secrets.FTP_USERNAME_FE }}
+          password: ${{ secrets.FTP_PASSWORD_FE }}
+          local-dir: ./frontend/
+          server-dir: /public_html/ # Đường dẫn gốc của website trên host FE

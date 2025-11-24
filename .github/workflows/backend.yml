@@ -1,0 +1,20 @@
+# Tên tệp: .github/workflows/backend.yml
+name: Deploy Backend (PHP)
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'backend/**' ]
+
+jobs:
+  deploy_be:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy BE via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.0
+        with:
+          server: ${{ secrets.FTP_HOST_BE }}
+          username: ${{ secrets.FTP_USERNAME_BE }}
+          password: ${{ secrets.FTP_PASSWORD_BE }}
+          local-dir: ./backend/
+          server-dir: /public_html/api/ # Đường dẫn thư mục API trên host BE
